@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+
+	<context id="DB2Tables" targetRuntime="MyBatis3">
+		<!-- 设置true生成文件没有注释 -->
+		<commentGenerator>
+			<property name="suppressAllComments" value="true" />
+		</commentGenerator>
+		<!-- 配置数据库连接 -->
+		<jdbcConnection 
+			driverClass="oracle.jdbc.driver.OracleDriver"
+			connectionURL="jdbc:oracle:thin:@localhost:1521:oracle" 
+			userId="rel"
+			password="rel2018">
+		</jdbcConnection>
+
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+
+		<!-- 指定javaEntities生成的位置 -->
+		<javaModelGenerator targetPackage="com.rel.entities"
+			targetProject=".\src\main\java">
+			<property name="enableSubPackages" value="true" />
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+
+		<!--指定sql映射文件生成的位置 -->
+		<sqlMapGenerator targetPackage="mapper" targetProject=".\src\main\resources">
+			<property name="enableSubPackages" value="true" />
+		</sqlMapGenerator>
+
+		<!-- 指定dao接口生成的位置，mapper接口 -->
+		<javaClientGenerator type="XMLMAPPER"
+			targetPackage="com.rel.dao" targetProject=".\src\main\java">
+			<property name="enableSubPackages" value="true" />
+		</javaClientGenerator>
+
+
+		<!-- table指定每个表的生成策略 -->
+		<table tableName="ACTIVITYNAME" domainObjectName="ActivityName">
+			<columnOverride column="IID" javaType="java.lang.Integer"></columnOverride>
+			<columnOverride column="lottery_number" javaType="java.lang.Integer"></columnOverride>
+			<columnOverride column="lottery_state" javaType="java.lang.Integer"></columnOverride>
+		</table>
+		<table tableName="ACTIVITYVISITAMOUNT" domainObjectName="ActivityVisitAmount">
+			<columnOverride column="IID" javaType="java.lang.Integer"></columnOverride>
+			<columnOverride column="visit_amount" javaType="java.lang.Integer"></columnOverride>
+		</table>
+		<table tableName="APPIDINFOS" domainObjectName="AppidInfos">
+			<columnOverride column="IID" javaType="java.lang.Integer"></columnOverride>
+			<columnOverride column="content_number" javaType="java.lang.Integer"></columnOverride>
+			<columnOverride column="is_refresh" javaType="java.lang.Integer"></columnOverride>
+		</table>
+		<table tableName="AWARDRECORD" domainObjectName="AwardRecord">
+			<columnOverride column="IID" javaType="java.lang.Integer"></columnOverride>
+		</table>
+		<table tableName="COUPONINFO" domainObjectName="CouponInfo">
+			<columnOverride column="IID" javaType="java.lang.Integer"></columnOverride>
+			<columnOverride column="coupon_amount" javaType="java.lang.Integer"></columnOverride>
+			<columnOverride column="remain_amount" javaType="java.lang.Integer"></columnOverride>
+		</table>
+		<table tableName="LOTTERYAMOUNT" domainObjectName="LotteryAmount">
+			<columnOverride column="IID" javaType="java.lang.Integer"></columnOverride>
+			<columnOverride column="remain_number" javaType="java.lang.Integer"></columnOverride>
+		</table>
+		<table tableName="LOTTERYRECORD" domainObjectName="LotteryRecord">
+			<columnOverride column="IID" javaType="java.lang.Integer"></columnOverride>
+		</table>
+		<table tableName="PRIZEINFO" domainObjectName="PrizeInfo">
+			<columnOverride column="IID" javaType="java.lang.Integer"></columnOverride>
+			<columnOverride column="prize_amount" javaType="java.lang.Integer"></columnOverride>
+			<columnOverride column="remain_amount" javaType="java.lang.Integer"></columnOverride>
+		</table>
+		<table tableName="SYSTEMUSER" domainObjectName="SystemUser">
+			<columnOverride column="IID" javaType="java.lang.Integer"></columnOverride>
+			<columnOverride column="role_id" javaType="java.lang.Integer"></columnOverride>
+			<columnOverride column="content_number" javaType="java.lang.Integer"></columnOverride>
+			<columnOverride column="is_refresh" javaType="java.lang.Integer"></columnOverride>
+		</table>
+		<table tableName="USER_DETAILS" domainObjectName="UserDetails">
+			<columnOverride column="IID" javaType="java.lang.Integer"></columnOverride>
+			<columnOverride column="state" javaType="java.lang.Integer"></columnOverride>
+		</table>
+	</context>
+</generatorConfiguration>

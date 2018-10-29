@@ -1,0 +1,608 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rel.dao.AppidInfosMapper">
+  <resultMap id="BaseResultMap" type="com.rel.entities.AppidInfos">
+    <id column="IID" jdbcType="DECIMAL" property="iid" />
+    <result column="user_name" jdbcType="OTHER" property="userName" />
+    <result column="password" jdbcType="OTHER" property="password" />
+    <result column="appid" jdbcType="OTHER" property="appid" />
+    <result column="public_number_name" jdbcType="OTHER" property="publicNumberName" />
+    <result column="organization" jdbcType="OTHER" property="organization" />
+    <result column="content_person" jdbcType="OTHER" property="contentPerson" />
+    <result column="content_number" jdbcType="DECIMAL" property="contentNumber" />
+    <result column="key_path" jdbcType="OTHER" property="keyPath" />
+    <result column="is_refresh" jdbcType="DECIMAL" property="isRefresh" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    IID, user_name, password, appid, public_number_name, organization, content_person, 
+    content_number, key_path, is_refresh, create_time
+  </sql>
+  <select id="selectByExample" parameterType="com.rel.entities.AppidInfosExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from APPIDINFOS
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from APPIDINFOS
+    where IID = #{iid,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from APPIDINFOS
+    where IID = #{iid,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.rel.entities.AppidInfosExample">
+    delete from APPIDINFOS
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.rel.entities.AppidInfos">
+    insert into APPIDINFOS (IID, user_name, password, 
+      appid, public_number_name, organization, 
+      content_person, content_number, key_path, 
+      is_refresh, create_time)
+    values (#{iid,jdbcType=DECIMAL}, #{userName,jdbcType=OTHER}, #{password,jdbcType=OTHER}, 
+      #{appid,jdbcType=OTHER}, #{publicNumberName,jdbcType=OTHER}, #{organization,jdbcType=OTHER}, 
+      #{contentPerson,jdbcType=OTHER}, #{contentNumber,jdbcType=DECIMAL}, #{keyPath,jdbcType=OTHER}, 
+      #{isRefresh,jdbcType=DECIMAL}, #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.rel.entities.AppidInfos">
+    insert into APPIDINFOS
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="iid != null">
+        IID,
+      </if>
+      <if test="userName != null">
+        user_name,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="appid != null">
+        appid,
+      </if>
+      <if test="publicNumberName != null">
+        public_number_name,
+      </if>
+      <if test="organization != null">
+        organization,
+      </if>
+      <if test="contentPerson != null">
+        content_person,
+      </if>
+      <if test="contentNumber != null">
+        content_number,
+      </if>
+      <if test="keyPath != null">
+        key_path,
+      </if>
+      <if test="isRefresh != null">
+        is_refresh,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="iid != null">
+        #{iid,jdbcType=DECIMAL},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=OTHER},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=OTHER},
+      </if>
+      <if test="appid != null">
+        #{appid,jdbcType=OTHER},
+      </if>
+      <if test="publicNumberName != null">
+        #{publicNumberName,jdbcType=OTHER},
+      </if>
+      <if test="organization != null">
+        #{organization,jdbcType=OTHER},
+      </if>
+      <if test="contentPerson != null">
+        #{contentPerson,jdbcType=OTHER},
+      </if>
+      <if test="contentNumber != null">
+        #{contentNumber,jdbcType=DECIMAL},
+      </if>
+      <if test="keyPath != null">
+        #{keyPath,jdbcType=OTHER},
+      </if>
+      <if test="isRefresh != null">
+        #{isRefresh,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.rel.entities.AppidInfosExample" resultType="java.lang.Long">
+    select count(*) from APPIDINFOS
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update APPIDINFOS
+    <set>
+      <if test="record.iid != null">
+        IID = #{record.iid,jdbcType=DECIMAL},
+      </if>
+      <if test="record.userName != null">
+        user_name = #{record.userName,jdbcType=OTHER},
+      </if>
+      <if test="record.password != null">
+        password = #{record.password,jdbcType=OTHER},
+      </if>
+      <if test="record.appid != null">
+        appid = #{record.appid,jdbcType=OTHER},
+      </if>
+      <if test="record.publicNumberName != null">
+        public_number_name = #{record.publicNumberName,jdbcType=OTHER},
+      </if>
+      <if test="record.organization != null">
+        organization = #{record.organization,jdbcType=OTHER},
+      </if>
+      <if test="record.contentPerson != null">
+        content_person = #{record.contentPerson,jdbcType=OTHER},
+      </if>
+      <if test="record.contentNumber != null">
+        content_number = #{record.contentNumber,jdbcType=DECIMAL},
+      </if>
+      <if test="record.keyPath != null">
+        key_path = #{record.keyPath,jdbcType=OTHER},
+      </if>
+      <if test="record.isRefresh != null">
+        is_refresh = #{record.isRefresh,jdbcType=DECIMAL},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update APPIDINFOS
+    set IID = #{record.iid,jdbcType=DECIMAL},
+      user_name = #{record.userName,jdbcType=OTHER},
+      password = #{record.password,jdbcType=OTHER},
+      appid = #{record.appid,jdbcType=OTHER},
+      public_number_name = #{record.publicNumberName,jdbcType=OTHER},
+      organization = #{record.organization,jdbcType=OTHER},
+      content_person = #{record.contentPerson,jdbcType=OTHER},
+      content_number = #{record.contentNumber,jdbcType=DECIMAL},
+      key_path = #{record.keyPath,jdbcType=OTHER},
+      is_refresh = #{record.isRefresh,jdbcType=DECIMAL},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.rel.entities.AppidInfos">
+    update APPIDINFOS
+    <set>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=OTHER},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=OTHER},
+      </if>
+      <if test="appid != null">
+        appid = #{appid,jdbcType=OTHER},
+      </if>
+      <if test="publicNumberName != null">
+        public_number_name = #{publicNumberName,jdbcType=OTHER},
+      </if>
+      <if test="organization != null">
+        organization = #{organization,jdbcType=OTHER},
+      </if>
+      <if test="contentPerson != null">
+        content_person = #{contentPerson,jdbcType=OTHER},
+      </if>
+      <if test="contentNumber != null">
+        content_number = #{contentNumber,jdbcType=DECIMAL},
+      </if>
+      <if test="keyPath != null">
+        key_path = #{keyPath,jdbcType=OTHER},
+      </if>
+      <if test="isRefresh != null">
+        is_refresh = #{isRefresh,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where IID = #{iid,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.rel.entities.AppidInfos">
+    update APPIDINFOS
+    set user_name = #{userName,jdbcType=OTHER},
+      password = #{password,jdbcType=OTHER},
+      appid = #{appid,jdbcType=OTHER},
+      public_number_name = #{publicNumberName,jdbcType=OTHER},
+      organization = #{organization,jdbcType=OTHER},
+      content_person = #{contentPerson,jdbcType=OTHER},
+      content_number = #{contentNumber,jdbcType=DECIMAL},
+      key_path = #{keyPath,jdbcType=OTHER},
+      is_refresh = #{isRefresh,jdbcType=DECIMAL},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where IID = #{iid,jdbcType=DECIMAL}
+  </update>
+  <resultMap id="BaseResultMap" type="com.rel.entities.AppidInfos">
+    <id column="IID" jdbcType="DECIMAL" property="iid" />
+    <result column="user_name" jdbcType="OTHER" property="userName" />
+    <result column="password" jdbcType="OTHER" property="password" />
+    <result column="appid" jdbcType="OTHER" property="appid" />
+    <result column="public_number_name" jdbcType="OTHER" property="publicNumberName" />
+    <result column="organization" jdbcType="OTHER" property="organization" />
+    <result column="content_person" jdbcType="OTHER" property="contentPerson" />
+    <result column="content_number" jdbcType="DECIMAL" property="contentNumber" />
+    <result column="key_path" jdbcType="OTHER" property="keyPath" />
+    <result column="is_refresh" jdbcType="DECIMAL" property="isRefresh" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    IID, user_name, password, appid, public_number_name, organization, content_person, 
+    content_number, key_path, is_refresh, create_time
+  </sql>
+  <select id="selectByExample" parameterType="com.rel.entities.AppidInfosExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from APPIDINFOS
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from APPIDINFOS
+    where IID = #{iid,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from APPIDINFOS
+    where IID = #{iid,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.rel.entities.AppidInfosExample">
+    delete from APPIDINFOS
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.rel.entities.AppidInfos">
+    insert into APPIDINFOS (IID, user_name, password, 
+      appid, public_number_name, organization, 
+      content_person, content_number, key_path, 
+      is_refresh, create_time)
+    values (#{iid,jdbcType=DECIMAL}, #{userName,jdbcType=OTHER}, #{password,jdbcType=OTHER}, 
+      #{appid,jdbcType=OTHER}, #{publicNumberName,jdbcType=OTHER}, #{organization,jdbcType=OTHER}, 
+      #{contentPerson,jdbcType=OTHER}, #{contentNumber,jdbcType=DECIMAL}, #{keyPath,jdbcType=OTHER}, 
+      #{isRefresh,jdbcType=DECIMAL}, #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.rel.entities.AppidInfos">
+    insert into APPIDINFOS
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="iid != null">
+        IID,
+      </if>
+      <if test="userName != null">
+        user_name,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="appid != null">
+        appid,
+      </if>
+      <if test="publicNumberName != null">
+        public_number_name,
+      </if>
+      <if test="organization != null">
+        organization,
+      </if>
+      <if test="contentPerson != null">
+        content_person,
+      </if>
+      <if test="contentNumber != null">
+        content_number,
+      </if>
+      <if test="keyPath != null">
+        key_path,
+      </if>
+      <if test="isRefresh != null">
+        is_refresh,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="iid != null">
+        #{iid,jdbcType=DECIMAL},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=OTHER},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=OTHER},
+      </if>
+      <if test="appid != null">
+        #{appid,jdbcType=OTHER},
+      </if>
+      <if test="publicNumberName != null">
+        #{publicNumberName,jdbcType=OTHER},
+      </if>
+      <if test="organization != null">
+        #{organization,jdbcType=OTHER},
+      </if>
+      <if test="contentPerson != null">
+        #{contentPerson,jdbcType=OTHER},
+      </if>
+      <if test="contentNumber != null">
+        #{contentNumber,jdbcType=DECIMAL},
+      </if>
+      <if test="keyPath != null">
+        #{keyPath,jdbcType=OTHER},
+      </if>
+      <if test="isRefresh != null">
+        #{isRefresh,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.rel.entities.AppidInfosExample" resultType="java.lang.Long">
+    select count(*) from APPIDINFOS
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update APPIDINFOS
+    <set>
+      <if test="record.iid != null">
+        IID = #{record.iid,jdbcType=DECIMAL},
+      </if>
+      <if test="record.userName != null">
+        user_name = #{record.userName,jdbcType=OTHER},
+      </if>
+      <if test="record.password != null">
+        password = #{record.password,jdbcType=OTHER},
+      </if>
+      <if test="record.appid != null">
+        appid = #{record.appid,jdbcType=OTHER},
+      </if>
+      <if test="record.publicNumberName != null">
+        public_number_name = #{record.publicNumberName,jdbcType=OTHER},
+      </if>
+      <if test="record.organization != null">
+        organization = #{record.organization,jdbcType=OTHER},
+      </if>
+      <if test="record.contentPerson != null">
+        content_person = #{record.contentPerson,jdbcType=OTHER},
+      </if>
+      <if test="record.contentNumber != null">
+        content_number = #{record.contentNumber,jdbcType=DECIMAL},
+      </if>
+      <if test="record.keyPath != null">
+        key_path = #{record.keyPath,jdbcType=OTHER},
+      </if>
+      <if test="record.isRefresh != null">
+        is_refresh = #{record.isRefresh,jdbcType=DECIMAL},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update APPIDINFOS
+    set IID = #{record.iid,jdbcType=DECIMAL},
+      user_name = #{record.userName,jdbcType=OTHER},
+      password = #{record.password,jdbcType=OTHER},
+      appid = #{record.appid,jdbcType=OTHER},
+      public_number_name = #{record.publicNumberName,jdbcType=OTHER},
+      organization = #{record.organization,jdbcType=OTHER},
+      content_person = #{record.contentPerson,jdbcType=OTHER},
+      content_number = #{record.contentNumber,jdbcType=DECIMAL},
+      key_path = #{record.keyPath,jdbcType=OTHER},
+      is_refresh = #{record.isRefresh,jdbcType=DECIMAL},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.rel.entities.AppidInfos">
+    update APPIDINFOS
+    <set>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=OTHER},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=OTHER},
+      </if>
+      <if test="appid != null">
+        appid = #{appid,jdbcType=OTHER},
+      </if>
+      <if test="publicNumberName != null">
+        public_number_name = #{publicNumberName,jdbcType=OTHER},
+      </if>
+      <if test="organization != null">
+        organization = #{organization,jdbcType=OTHER},
+      </if>
+      <if test="contentPerson != null">
+        content_person = #{contentPerson,jdbcType=OTHER},
+      </if>
+      <if test="contentNumber != null">
+        content_number = #{contentNumber,jdbcType=DECIMAL},
+      </if>
+      <if test="keyPath != null">
+        key_path = #{keyPath,jdbcType=OTHER},
+      </if>
+      <if test="isRefresh != null">
+        is_refresh = #{isRefresh,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where IID = #{iid,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.rel.entities.AppidInfos">
+    update APPIDINFOS
+    set user_name = #{userName,jdbcType=OTHER},
+      password = #{password,jdbcType=OTHER},
+      appid = #{appid,jdbcType=OTHER},
+      public_number_name = #{publicNumberName,jdbcType=OTHER},
+      organization = #{organization,jdbcType=OTHER},
+      content_person = #{contentPerson,jdbcType=OTHER},
+      content_number = #{contentNumber,jdbcType=DECIMAL},
+      key_path = #{keyPath,jdbcType=OTHER},
+      is_refresh = #{isRefresh,jdbcType=DECIMAL},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where IID = #{iid,jdbcType=DECIMAL}
+  </update>
+</mapper>

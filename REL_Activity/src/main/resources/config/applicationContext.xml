@@ -28,21 +28,42 @@
         <property name="filters" value="config" />
         
         <property name="validationQuery" value="SELECT 1 from dual" /> <!-- 验证连接是否成功, SQL SELECT 指令至少要返回一行  (测试/验证连接池连接的SQL语句也因数据库而异)-->
+        <property name="testOnBorrow" value="true" /> <!-- 申请连接时执行validationQuery检测连接是否有效，做了这个配置会降低性能。 --> 
+        <property name="testOnReturn" value="false" /> <!-- 归还连接时执行validationQuery检测连接是否有效，做了这个配置会降低性能 -->
+        <property name="minEvictableIdleTimeMillis" value="300000" /> <!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+         <!-- 建议配置为true，不影响性能，并且保证安全性。申请连接的时候检测，如果空闲时间大于timeBetweenEvictionRunsMillis，执行validationQuery检测连接是否有效。 -->
+        <property name="testWhileIdle" value="true" />
+        <property name="timeBetweenEvictionRunsMillis" value="60000" />
+        <!-- 超过removeAbandonedTimeout时间后，是否进行没用连接（废弃）的回收 -->
+        <property name="removeAbandoned" value="true"></property>
+        <!-- 1800秒 -->
+        <property name="removeAbandonedTimeout" value="1800"></property>
+        <!--  <property name="connectionProperties" value="config.decrypt=true" />  -->
+    </bean>
+    
+    <bean name="datasource1" class="com.alibaba.druid.pool.DruidDataSource"  
+        init-method="init" destroy-method="close">  
+        <!-- <property name="driverClassName" value="${jdbc.driver}" /> --><!-- dirverClassName 可以不加 -->  
+        <property name="url" value="${jdbc.url1}"></property>  
+        <property name="username" value="${jdbc.username1}" />  
+        <property name="password" value="${jdbc.password1}" />  
+        
+        <property name="validationQuery" value="SELECT 1" /> <!-- 验证连接是否成功, SQL SELECT 指令至少要返回一行  (测试/验证连接池连接的SQL语句也因数据库而异)-->
         <property name="testOnBorrow" value="false" /> <!-- 申请连接时执行validationQuery检测连接是否有效，做了这个配置会降低性能。 --> 
         <property name="testOnReturn" value="false" /> <!-- 归还连接时执行validationQuery检测连接是否有效，做了这个配置会降低性能 -->
         <property name="minEvictableIdleTimeMillis" value="300000" /> <!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
          <!-- 建议配置为true，不影响性能，并且保证安全性。申请连接的时候检测，如果空闲时间大于timeBetweenEvictionRunsMillis，执行validationQuery检测连接是否有效。 -->
         <property name="testWhileIdle" value="true" />
         <property name="timeBetweenEvictionRunsMillis" value="60000" />
-        <!--  <property name="connectionProperties" value="config.decrypt=true" />  -->
-    </bean>
+        <!-- property name="connectionProperties" value="config.decrypt=true" />  -->
+    </bean> 
     
     <bean id="multipleDataSource" class="com.rel.util.MultipleDataSource">  
         <property name="defaultTargetDataSource" ref="datasource"/>  
         <property name="targetDataSources">  
             <map>  
                 <entry key="datasource" value-ref="datasource"/>  
-               <!--  <entry key="datasource1" value-ref="datasource1"/> -->  
+               <entry key="datasource1" value-ref="datasource1"/>  
             </map>  
         </property>  
     </bean>

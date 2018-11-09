@@ -14,8 +14,11 @@
 	</context:component-scan>
 	
 	<!-- 对静态资源文件的访问,采用此种方式可以自己定义路径 -->  
-    <!-- <mvc:resources location="/static/js/" mapping="/js/**"/>  
-    <mvc:resources location="/static/bootstrap-3.3.7-dist/" mapping="/bootstrap-3.3.7-dist/**"/> -->
+     <mvc:resources location="/WEB-INF/elife/js/" mapping="elife/js/**"/>  
+     <mvc:resources location="/WEB-INF/elife/images/" mapping="elife/images/**"/> 
+     <mvc:resources location="/WEB-INF/elife/css/" mapping="elife/css/**"/>   
+     <mvc:resources location="/WEB-INF/elife/font/" mapping="elife/font/**"/>   
+    <!--<mvc:resources location="/static/bootstrap-3.3.7-dist/" mapping="/bootstrap-3.3.7-dist/**"/> -->
 	
 	<!--配置视图解析器，方便页面返回  -->
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">

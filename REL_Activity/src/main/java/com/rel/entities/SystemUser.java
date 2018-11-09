@@ -19,7 +19,7 @@ public class SystemUser {
 
     private Object contentPerson;
 
-    private Integer contentNumber;
+    private long contentNumber;
 
     private Object keyPath;
 
@@ -91,11 +91,11 @@ public class SystemUser {
         this.contentPerson = contentPerson;
     }
 
-    public Integer getContentNumber() {
+    public long getContentNumber() {
         return contentNumber;
     }
 
-    public void setContentNumber(Integer contentNumber) {
+    public void setContentNumber(long contentNumber) {
         this.contentNumber = contentNumber;
     }
 

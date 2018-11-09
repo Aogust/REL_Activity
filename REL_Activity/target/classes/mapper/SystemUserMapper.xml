@@ -1,4 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.rel.dao.SystemUserMapper">
+<resultMap id="BaseResultMap" type="com.rel.entities.SystemUser">
+    <id column="IID" jdbcType="DECIMAL" property="iid" />
+    <result column="user_name" jdbcType="OTHER" property="userName" />
+    <result column="password" jdbcType="OTHER" property="password" />
+    <result column="role_id" jdbcType="DECIMAL" property="roleId" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <select id="selectByUserName" resultType="com.rel.entities.SystemUser">
+    select * from SystemUser where "user_name"=#{userName}
+  </select>
+   
 </mapper>
